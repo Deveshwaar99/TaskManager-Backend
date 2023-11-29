@@ -53,7 +53,7 @@ const createUser = async (request, response, next) => {
       .status(201)
       .send({ _id: user._id, firstName, lastName, email, token })
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     next(error)
   }
 }
@@ -91,16 +91,19 @@ const logoutAllDevices = async (request, response, next) => {
 const loginUser = async (request, response, next) => {
   try {
     const isValid = loginSchemaValidate(request.body)
-
+    // console.log({isValid})
     if (isValid.error) {
       throw new httpError('Invalid email or Password', 400)
     }
     //verify User
+    // console.log("valid schema")
     const user = await User.verifyLogin(
       request.body.email,
       request.body.password
     )
+    // console.log(user)
     if (!user) {
+      // console.log("inside if")
       throw new httpError('Invalid email or Password', 400)
     }
     // console.log(user)

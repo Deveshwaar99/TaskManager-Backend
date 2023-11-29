@@ -37,7 +37,7 @@ const entrySchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      select: false,
+      // select: false,
       validate(value) {
         if (value.toLowerCase().includes('password')) {
           throw new Error('Password cannot contain "password"')
@@ -55,14 +55,15 @@ const entrySchema = new mongoose.Schema(
 )
 //To verify whether the user is available in the database
 entrySchema.statics.verifyLogin = async (email, password) => {
+  // console.log("inside verifyLogin"+email+password)
   const user = await User.findOne({ email })
 
   if (!user) {
     return
   }
-
+  // console.log('user is present')
   const isValid = await bcrypt.compare(password, user.password)
-
+// console.log("is valid after password check"+isValid)
   if (!isValid) {
     return
   }

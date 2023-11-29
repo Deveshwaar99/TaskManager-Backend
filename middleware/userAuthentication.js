@@ -12,7 +12,7 @@ const userAuthentication = async (request, response, next) => {
   const [authType, authToken] = request.headers.authorization.split(' ')
 
   if (authType === 'Basic') {
-    // console.log('its basic')
+    console.log('its basic')
     const bufferObject = Buffer.from(authToken, 'base64')
     let string = bufferObject.toString('utf8')
     const [email, password] = string.split(':')

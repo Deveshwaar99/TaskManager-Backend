@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dev": "cross-env env-cmd -f ./.env  nodemon index.js",
-    "test": "cross-env env-cmd -f ./test/test.env jest --watch --runInBand ",
+    "test": "cross-env env-cmd -f ./test/test.env jest --runInBand ",
     "coverage": "npm test --coverage --watchAll"
   },
   "jest": {

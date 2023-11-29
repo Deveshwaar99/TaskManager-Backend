@@ -23,19 +23,20 @@ const getAllTasks = async (request, response, next) => {
 
 const addTask = async (request, response, next) => {
   try {
+    // console.log('Recieved a req')
     const { error } = taskSchemaValidate(request.body)
-    console.log(error)
+    // console.log(error)
     if (error) {
       throw new httpError(error.message, 400)
     }
-    console.log('no errors in input')
+    // console.log('no errors in input')
     const task = new Task({ ...request.body, owner: request.user._id })
-    console.log('new task created' + task)
+    // console.log('new task created' + task)
     await task.save()
-    console.log('task saved')
+    // console.log('task saved')
     response.status(201).send(task)
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     next(error)
   }
 }
